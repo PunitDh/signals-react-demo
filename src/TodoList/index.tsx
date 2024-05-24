@@ -1,15 +1,18 @@
 import "./index.css";
 import TodoItem from "./TodoItem";
-import { errorMessage, todoItems } from "../signals";
+import { currentEditing, errorMessage, todoItems } from "../signals";
 import Logo from "../assets/logo.png";
 import TodoListOption from "./TodoListOption";
 import {
+  cancelEditing,
   dismissError,
   handleComplete,
   handleDelete,
+  handleEdit,
   handleSubmit,
   toggleValue,
 } from "./actions";
+import CancelIcon from "../assets/CancelIcon";
 
 const TodoList = () => (
   <main>
@@ -26,7 +29,7 @@ const TodoList = () => (
         <TodoListOption
           checked={todoItems.value.showDate}
           onChange={toggleValue("showDate")}
-          label="Show last updated"
+          label="Show timestamp"
         />
         <TodoListOption
           checked={todoItems.value.sortByUpdated}
@@ -52,10 +55,21 @@ const TodoList = () => (
           placeholder="Enter a to-do item"
           autoFocus
           autoComplete="off"
+          defaultValue={currentEditing.value?.title}
         />
         <button className="todo-form-submit-button" type="submit">
-          Add Todo
+          {currentEditing.value ? "Edit" : "Add"} Todo
         </button>
+        {currentEditing.value && (
+          <button
+            className="todo-list-item-action-button"
+            type="button"
+            onClick={cancelEditing}
+            title="Cancel editing"
+          >
+            <CancelIcon size={24} color="white" />
+          </button>
+        )}
       </fieldset>
     </form>
     <div className="todo-output">
@@ -73,6 +87,7 @@ const TodoList = () => (
               item={item}
               onComplete={handleComplete(item.id)}
               onDelete={handleDelete(item.id)}
+              onEdit={handleEdit(item.id)}
             />
           ))}
       </ul>

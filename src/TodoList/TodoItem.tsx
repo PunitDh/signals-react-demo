@@ -1,4 +1,5 @@
 import DeleteIcon from "../assets/DeleteIcon";
+import EditIcon from "../assets/EditIcon";
 import { todoItems } from "../signals";
 import { Todo } from "../types";
 import { formatDate } from "./actions";
@@ -8,9 +9,10 @@ type Props = {
   item: Todo;
   onComplete: () => void;
   onDelete: () => void;
+  onEdit: () => void;
 };
 
-const TodoItem = ({ item, onComplete, onDelete }: Props) => (
+const TodoItem = ({ item, onComplete, onDelete, onEdit }: Props) => (
   <li className="todo-item" key={item.id}>
     <span className="todo-item-row" title="Mark as completed">
       <label className="todo-item-label" htmlFor={`todo-item-${item.id}`}>
@@ -28,10 +30,19 @@ const TodoItem = ({ item, onComplete, onDelete }: Props) => (
           <span className="subtitle">{formatDate(item.updated)}</span>
         )}
       </label>
+      {!item.completed && <button
+        className="todo-list-item-action-button"
+        type="button"
+        onClick={onEdit}
+        title="Edit this to-do item"
+      >
+        <EditIcon size={24} color="white" />
+      </button>}
       <button
-        className="todo-list-item-delete-button"
+        className="todo-list-item-action-button"
         type="button"
         onClick={onDelete}
+        title="Delete this to-do item"
       >
         <DeleteIcon size={24} color="white" />
       </button>

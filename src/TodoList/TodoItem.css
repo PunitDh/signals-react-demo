@@ -8,7 +8,7 @@
   text-decoration: line-through;
 }
 
-.todo-list-item-delete-button {
+.todo-list-item-action-button {
   border-radius: 0.25rem;
   outline: none;
   display: flex;
@@ -22,12 +22,12 @@
   border: none;
 }
 
-.todo-list-item-delete-button svg:hover {
+.todo-list-item-action-button svg:hover {
   fill: rgba(255, 255, 255, 0.7);
   stroke: rgba(255, 255, 255, 0.7);
 }
 
-.todo-list-item-delete-button:hover {
+.todo-list-item-action-button:hover {
   color: rgba(255, 255, 255, 0.1);
 }
 
