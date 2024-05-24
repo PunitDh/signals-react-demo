@@ -2,11 +2,6 @@
   margin-left: 0;
 }
 
-.todo-item .subtitle {
-  color: gray;
-  font-size: 10pt;
-}
-
 .todo-item:not(:last-child) {
   margin-bottom: 0.5rem;
 }

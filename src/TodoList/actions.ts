@@ -1,5 +1,5 @@
 import { errorMessage, todoItems } from "../signals";
-import { Todo, TodoMap } from "../types";
+import { defaultTodoMap, Todo, TodoMap, ToggleOptions } from "../types";
 
 const setTodoMap = (param: Partial<TodoMap>) => {
   const todoMap: TodoMap = {
@@ -71,11 +71,8 @@ export const handleDelete = (id: number) => () =>
     items: [...todoItems.value.items].filter((item) => item.id !== id),
   });
 
-export const toggleHideCompleted = () =>
-  setTodoMap({ hideCompleted: !todoItems.value.hideCompleted });
-
-export const toggleShowDate = () =>
-  setTodoMap({ showDate: !todoItems.value.showDate });
+export const toggleValue = (param: keyof ToggleOptions) => () =>
+  setTodoMap({ [param]: !todoItems.value[param] });
 
 export const dismissError = () => {
   errorMessage.value = null;

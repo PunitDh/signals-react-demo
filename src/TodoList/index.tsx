@@ -1,4 +1,4 @@
-import "./TodoList.css";
+import "./index.css";
 import TodoItem from "./TodoItem";
 import { errorMessage, todoItems } from "../signals";
 import Logo from "../assets/logo.png";
@@ -8,8 +8,7 @@ import {
   handleComplete,
   handleDelete,
   handleSubmit,
-  toggleHideCompleted,
-  toggleShowDate,
+  toggleValue,
 } from "./actions";
 
 const TodoList = () => (
@@ -21,13 +20,18 @@ const TodoList = () => (
       <ul className="todo-list-options-group">
         <TodoListOption
           checked={todoItems.value.hideCompleted}
-          onChange={toggleHideCompleted}
+          onChange={toggleValue("hideCompleted")}
           label="Hide completed"
         />
         <TodoListOption
           checked={todoItems.value.showDate}
-          onChange={toggleShowDate}
-          label="Show date"
+          onChange={toggleValue("showDate")}
+          label="Show last updated"
+        />
+        <TodoListOption
+          checked={todoItems.value.sortByUpdated}
+          onChange={toggleValue("sortByUpdated")}
+          label="Sort by last updated"
         />
       </ul>
     </div>
@@ -58,6 +62,11 @@ const TodoList = () => (
       <ul className="todo-list">
         {todoItems.value.items
           .filter((item) => !(item.completed && todoItems.value.hideCompleted))
+          .sort((a, b) =>
+            todoItems.value.sortByUpdated
+              ? b.updated.getTime() - a.updated.getTime()
+              : a.id - b.id
+          )
           .map((item) => (
             <TodoItem
               key={item.id}

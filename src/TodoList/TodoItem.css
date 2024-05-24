@@ -30,3 +30,8 @@
 .todo-list-item-delete-button:hover {
   color: rgba(255, 255, 255, 0.1);
 }
+
+.todo-item .subtitle {
+  color: gray;
+  font-size: 10pt;
+}
