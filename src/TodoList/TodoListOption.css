@@ -1,0 +1,14 @@
+.todo-list-option-checkbox {
+  cursor: pointer;
+}
+
+.todo-list-option-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.todo-list-option-input-group > * {
+  font-size: 12pt;
+  cursor: pointer;
+  user-select: none;
+}
