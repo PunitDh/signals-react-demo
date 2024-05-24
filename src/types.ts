@@ -17,10 +17,12 @@ export type ToggleOptions = {
   sortByUpdated: boolean;
 };
 
-export const defaultTodoMap: TodoMap = {
+export const defaultTodoMap = {
   items: [],
   maxId: 0,
   hideCompleted: false,
   showDate: false,
   sortByUpdated: false,
-};
+} as const;
+
+export const TODOS_KEY = "todos" as const;

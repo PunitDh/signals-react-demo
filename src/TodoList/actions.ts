@@ -1,5 +1,5 @@
 import { errorMessage, todoItems } from "../signals";
-import { defaultTodoMap, Todo, TodoMap, ToggleOptions } from "../types";
+import { Todo, TodoMap, TODOS_KEY, ToggleOptions } from "../types";
 
 const setTodoMap = (param: Partial<TodoMap>) => {
   const todoMap: TodoMap = {
@@ -7,7 +7,7 @@ const setTodoMap = (param: Partial<TodoMap>) => {
     ...param,
   };
   todoItems.value = todoMap;
-  localStorage.setItem("todos", JSON.stringify(todoItems));
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todoItems));
 };
 
 export const formatDate = (date: Date): string => {
